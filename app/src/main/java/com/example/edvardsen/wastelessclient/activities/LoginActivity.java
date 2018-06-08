@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -18,8 +17,7 @@ import com.example.edvardsen.wastelessclient.R;
 import com.example.edvardsen.wastelessclient.data.UserModel;
 import com.example.edvardsen.wastelessclient.miscellaneous.Constants;
 import com.example.edvardsen.wastelessclient.services.HandlerService;
-import com.example.edvardsen.wastelessclient.services.JSONService;
-import com.google.android.gms.ads.internal.gmsg.HttpClient;
+import com.example.edvardsen.wastelessclient.services.ReaderService;
 
 import org.json.JSONObject;
 
@@ -79,7 +77,7 @@ public class LoginActivity extends Activity {
                             Log.i("information", String.valueOf(httpURLConnection.getResponseCode()));
 
                             if(httpURLConnection.getResponseCode() == 200){
-                                JSONObject jsonObject = JSONService.toJSONObject(httpURLConnection.getInputStream());
+                                JSONObject jsonObject = ReaderService.toJSONObject(httpURLConnection.getInputStream());
                                 UserModel.getInstance();
                                 UserModel.setEmail(jsonObject.getString("Email"));
                                 UserModel.setPassword(jsonObject.getString("Password"));
@@ -126,7 +124,7 @@ public class LoginActivity extends Activity {
                                 HandlerService.makeToast(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT, 500);
                             }else{
                                 if(response.code() == 200){
-                                    JSONObject object  = JSONService.toJSONObject(response.body().byteStream());
+                                    JSONObject object  = ReaderService.toJSONObject(response.body().byteStream());
                                     Log.i("information", object.getString("UserID"));
                                     Log.i("information", String.valueOf(object.length()));
                                     Log.i("information", object.toString());

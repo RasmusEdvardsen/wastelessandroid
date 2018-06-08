@@ -50,15 +50,6 @@ public class DateRecog {
                 return DATE_FORMAT_REGEXPS.get(regexp);
             }
         }
-        return null; // Unknown format.
+        return null;
     }
-
-    public Date getDate(String s, String chosenFormat) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat(chosenFormat);
-        Date date = format.parse(s);
-        return date;
-
-
-    }
-
 }

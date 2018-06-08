@@ -3,7 +3,6 @@ package com.example.edvardsen.wastelessclient.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,25 +13,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.edvardsen.wastelessclient.R;
-import com.example.edvardsen.wastelessclient.data.FridgeObjects;
 import com.example.edvardsen.wastelessclient.miscellaneous.Constants;
 import com.example.edvardsen.wastelessclient.services.HandlerService;
 import com.example.edvardsen.wastelessclient.services.ReaderService;
 import com.google.zxing.Result;
-
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
-
-
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
 
 import static android.Manifest.permission.CAMERA;
 
@@ -55,9 +45,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
 
         if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.M)
         {
-            if(checkPermission())
-                Toast.makeText(getApplicationContext(), "Permission already granted!", Toast.LENGTH_LONG).show();
-            else
+            if(!checkPermission())
                 requestPermission();
         }
     }
@@ -135,17 +123,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
                 .show();
     }
 
-    /* private void secondDialog(DialogInterface.OnClickListener newListener){
-        new android.support.v7.app.AlertDialog.Builder(BarcodeActivity.this)
-                .setMessage("choose between these:")
-                .setItems(scanResults.indexOf(3), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-    } */
-
     @Override
     public void handleResult(final Result result) {
         Log.d("QRCodeScanner", result.getText());
@@ -163,7 +140,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
 
                     if(httpURLConnection.getResponseCode() == 200){
 
-                        String wordOccurrences = ReaderService.ResulttoString(httpURLConnection.getInputStream());
+                        String wordOccurrences = ReaderService.resultToString(httpURLConnection.getInputStream());
                         if(wordOccurrences.startsWith("\"")){
                             wordOccurrences = wordOccurrences.substring(1, wordOccurrences.length());
                         }

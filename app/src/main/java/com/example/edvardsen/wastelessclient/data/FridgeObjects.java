@@ -25,27 +25,18 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class FridgeObjects extends Activity {
-
-
-    RelativeLayout relativeLayoutProgressBar;
-//Store ExpDate
     public Date expDate;
-//Store Name
     public String name;
-    //Store EAN
     public String ean;
 
 
     public FridgeObjects( String name, Date expDate, String ean){
-
         this.expDate = expDate;
         this.name = name;
         this.ean= ean;
-
     }
 
     public void SendFridgeToDb(final Context ctx){
-
         Log.i("information toDb", "userid: " + String.valueOf(UserModel.getUserID()) + " expdata: " + expDate.toString() + " name: " + name + " ean: " + ean);
         final String url = Constants.baseURL + Constants.productsPath;
         final String json = "{\"UserID\": " + "\"" + String.valueOf(UserModel.getUserID()) + "\","
