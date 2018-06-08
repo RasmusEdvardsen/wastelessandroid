@@ -24,7 +24,7 @@ public class InventoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        listView = findViewById(R.id.listview);
+        /*listView = findViewById(R.id.listview);
         ListAdapter listAdapter = new ListAdapter(this,listItems);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -32,7 +32,7 @@ public class InventoryActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
-        });
+        });*/
     }
 
     public String getDateDiffString(Date dateOne, Date dateTwo){

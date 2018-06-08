@@ -1,5 +1,7 @@
 package com.example.edvardsen.wastelessclient.data;
 
+import java.util.ArrayList;
+
 /**
  * Created by Epico-u-01 on 4/8/2018.
  */
@@ -12,6 +14,7 @@ public class UserModel {
     private static String email = "";
     private static String password = "";
     private static int userID = -1;
+    private static ArrayList<Product> products = new ArrayList<>();
 
     private UserModel (){}
 
@@ -58,6 +61,18 @@ public class UserModel {
 
     public static void setPassword(String password) {
         UserModel.password = password;
+    }
+
+    public static void addProduct(Product product){
+        products.add(product);
+    }
+
+    public static void removeProduct(Product product){
+        products.remove(product);
+    }
+
+    public static ArrayList<Product> getProducts(){
+        return products;
     }
 }
 

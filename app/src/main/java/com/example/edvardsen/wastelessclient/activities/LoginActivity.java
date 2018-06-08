@@ -14,16 +14,24 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.edvardsen.wastelessclient.R;
+import com.example.edvardsen.wastelessclient.data.FridgeObjects;
+import com.example.edvardsen.wastelessclient.data.Product;
 import com.example.edvardsen.wastelessclient.data.UserModel;
 import com.example.edvardsen.wastelessclient.miscellaneous.Constants;
 import com.example.edvardsen.wastelessclient.services.HandlerService;
 import com.example.edvardsen.wastelessclient.services.ReaderService;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -82,6 +90,15 @@ public class LoginActivity extends Activity {
                                 UserModel.setEmail(jsonObject.getString("Email"));
                                 UserModel.setPassword(jsonObject.getString("Password"));
                                 UserModel.setUserID((Integer.parseInt(jsonObject.getString("UserID"))));
+                                JSONArray jsonArray = jsonObject.getJSONArray("ProductsConcrete");
+                                for(int i = 0; i < jsonArray.length(); i++){
+                                    JSONObject jObject = jsonArray.getJSONObject(i);
+                                    Product product = new Product(jObject.getString("Name")
+                                                    , jObject.getString("ExpiryDate")
+                                                    , jObject.getString("Id"));
+                                    UserModel.addProduct(product);
+                                }
+                                Log.i("information", String.valueOf(UserModel.getProducts().size()));
                                 Log.i("information", jsonObject.toString());
                                 startActivity(new Intent(getBaseContext(), MainActivity.class));
                             }
