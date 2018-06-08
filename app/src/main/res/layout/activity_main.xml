@@ -5,37 +5,62 @@
     android:layout_height="match_parent"
     tools:context="com.example.edvardsen.wastelessclient.activities.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/actMainLinearLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView android:text="TEST"
+        <LinearLayout
+            android:id="@+id/actMainLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtContent"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Scan Barcode"
-            android:id="@+id/scanBtn" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inventory"
-            android:id="@+id/inventoryBtn" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Scan expiration date"
-            android:id="@+id/ocrBtn" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GÅ IND PÅ FUCKING OCR"
-            android:id="@+id/ocrBtn2" />
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical"
+            android:paddingTop="50sp"
+            android:paddingBottom="149sp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:textColor="@android:color/white"
+                android:text="@string/wasteless"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/actMainLinearLayout"
+            android:background="@color/colorPrimaryDarkTransparent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20sp"
+                android:layout_marginTop="10sp">
+                <Button
+                    android:id="@+id/scanBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/buttonstylepink"
+                    android:text="Scan my product"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/inventoryBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/buttonstylepink"
+                    android:text="My inventory"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
