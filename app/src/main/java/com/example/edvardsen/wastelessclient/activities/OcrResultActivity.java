@@ -28,10 +28,7 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
     private TextView statusMessage;
     private TextView textValue;
     DateRecog dateRecog = new DateRecog();
-    private List<FridgeObjects> foodList = new ArrayList<>();
-    int ean = -1;
     private static final int RC_OCR_CAPTURE = 9003;
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,17 +89,13 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
                 if (data != null) {
                     String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
                     statusMessage.setText(R.string.ocr_success);
-
                     textValue.setText(text);
-
-                    String test = dateRecog.determineDateFormat(text);
 
                     Bundle extras = getIntent().getExtras();
                     String barcode = extras.getString("ean");
-                    Log.i("information actres", barcode);
-
                     String FoodTypeName = getIntent().getStringExtra("choice");
 
+                    String test = dateRecog.determineDateFormat(text);
                     if(test!=null){
                         SimpleDateFormat formatter = new SimpleDateFormat(test);
                         try {
