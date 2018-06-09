@@ -47,6 +47,7 @@ public class HandlerService {
 
                     }
                 });
+
                 final EditText input = new EditText(ctx);
 
                 builder.setNeutralButton("Manually Enter Name ", new DialogInterface.OnClickListener() {
@@ -60,11 +61,13 @@ public class HandlerService {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //startActivity(new Intent(getBaseContext(), OcrActivity.class));
+                        Intent intent = new Intent(ctx, OcrResultActivity.class);
+                        intent.putExtra("choise", scanResults[0]);
+                        intent.putExtra("ean", barcode);
+                        ctx.startActivity(intent);
                     }
                 });
 
-                //builder.setMessage(result.getText());
                 android.support.v7.app.AlertDialog alert1 = builder.create();
                 alert1.show();
             }

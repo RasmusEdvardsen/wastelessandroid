@@ -36,5 +36,9 @@ public class InventoryActivity extends Activity {
         }
     }
 
-    /*use renderview everytime u go in again*/
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RenderView();
+    }
 }

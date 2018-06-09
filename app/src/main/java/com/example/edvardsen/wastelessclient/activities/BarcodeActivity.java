@@ -174,6 +174,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         HandlerService.setBuilder(this, scanResults, barcodeResults[0]);
 
+        /*
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -182,7 +183,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
             intent.putExtra("ean", barcodeResults[0]);
             startActivity(intent);
             }
-        });
+        });*/
         AlertDialog alert1 = builder.create();
         alert1.show();
     }
