@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.example.edvardsen.wastelessclient.activities.BarcodeActivity;
 import com.example.edvardsen.wastelessclient.activities.MainActivity;
+import com.example.edvardsen.wastelessclient.data.Product;
 import com.example.edvardsen.wastelessclient.data.UserModel;
 import com.example.edvardsen.wastelessclient.miscellaneous.Constants;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
@@ -61,6 +63,19 @@ public class AsyncTaskService {
 
                     if(httpURLConnection.getResponseCode() == 200){
                         JSONObject jsonObject = ReaderService.toJSONObject(httpURLConnection.getInputStream());
+                        UserModel.getInstance();
+                        UserModel.setEmail(jsonObject.getString("Email"));
+                        UserModel.setPassword(jsonObject.getString("Password"));
+                        UserModel.setUserID((Integer.parseInt(jsonObject.getString("UserID"))));
+                        JSONArray jsonArray = jsonObject.getJSONArray("ProductsConcrete");
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jObject = jsonArray.getJSONObject(i);
+                            Product product = new Product(jObject.getString("Name")
+                                    , jObject.getString("ExpiryDate")
+                                    , jObject.getString("Id"));
+                            UserModel.addProduct(product);
+                        }
+                        Log.i("information", String.valueOf(UserModel.getProducts().size()));
                         Log.i("information", jsonObject.toString());
                         ctx.startActivity(new Intent(ctx, MainActivity.class));
                     }
