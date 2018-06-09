@@ -19,16 +19,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button scanBtn;
-        Button inventoryBtn;
-        NotificationScheduler notificationScheduler;
+        Button scanBtn = findViewById(R.id.scanBtn);
+        Button inventoryBtn = findViewById(R.id.inventoryBtn);
+        NotificationScheduler notificationScheduler = new NotificationScheduler();
 
-        notificationScheduler = new NotificationScheduler();
-        notificationScheduler.scheduleNotification(getBaseContext(), 1000);
-
-        scanBtn = findViewById(R.id.scanBtn);
-        inventoryBtn = findViewById(R.id.inventoryBtn);
-
+        notificationScheduler.scheduleNotification(getBaseContext(), 60000);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -30,6 +30,10 @@ public class FridgeObjects extends Activity {
     public String ean;
     public String id;
 
+    public FridgeObjects(){
+
+    }
+
     public FridgeObjects(String name, Date expDate, String ean){
         this.expDate = expDate;
         this.name = name;
