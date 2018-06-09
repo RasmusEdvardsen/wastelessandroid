@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.edvardsen.wastelessclient.activities.BarcodeActivity;
+import com.example.edvardsen.wastelessclient.activities.InventoryActivity;
 import com.example.edvardsen.wastelessclient.activities.MainActivity;
 import com.example.edvardsen.wastelessclient.data.Product;
 import com.example.edvardsen.wastelessclient.data.UserModel;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -30,7 +32,6 @@ import okhttp3.Response;
 
 public class AsyncTaskService {
     public void LoginFlow(final Context ctx, final RelativeLayout relativeLayoutProgressBar, final String emailInput, final String passwordInput){
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -126,27 +127,63 @@ public class AsyncTaskService {
         });
     }
 
-    public void GetFridgeObjects(final Context ctx, final String emailInput, final String passwordInput){
-        final String url = Constants.baseURL + Constants.productsPath;
-        final String json = "{\"UserID\": " + "\"" + String.valueOf(UserModel.getUserID()) + "\","
-             + "}";
-        // final String json = "{\"UserID\":33,\"EAN\":123123123,\"FoodTypeName\":\"Milk\",\"ExpirationDate\":\"2018-10-06\"}";
+    public void GetProducts(){
+        UserModel.getInstance();
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-
                 try{
-                    URL loginURL = new URL(Constants.baseURL + Constants.usersPath + "/?email=" + emailInput + "&password=" + passwordInput);
+                    // Create URL
+                    URL loginURL = new URL(Constants.baseURL + Constants.productsPath + "?userID=" + UserModel.getUserID() + "&format=concrete");
 
                     // Create connection
                     HttpURLConnection httpURLConnection = (HttpURLConnection) loginURL.openConnection();
                     Log.i("information", String.valueOf(httpURLConnection.getResponseCode()));
 
                     if(httpURLConnection.getResponseCode() == 200){
-
-                        // Assign Products??
+                        JSONArray jsonArray = new JSONArray(ReaderService.resultToString(httpURLConnection.getInputStream()));
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jObject = jsonArray.getJSONObject(i);
+                            Product product = new Product(jObject.getString("Name")
+                                    , jObject.getString("ExpiryDate")
+                                    , jObject.getString("Id"));
+                            UserModel.addProduct(product);
+                        }
+                        Log.i("information", String.valueOf(UserModel.getProducts().size()));
                     }
+                }catch (Exception e){
+                    Log.e("information", e.toString());
+                }
+            }
+        });
+    }
 
+    public void GetProductsAndRender(){
+        UserModel.getInstance();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    // Create URL
+                    URL loginURL = new URL(Constants.baseURL + Constants.productsPath + "?userID=" + UserModel.getUserID() + "&format=concrete");
+
+                    // Create connection
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) loginURL.openConnection();
+                    Log.i("information", String.valueOf(httpURLConnection.getResponseCode()));
+
+                    if(httpURLConnection.getResponseCode() == 200){
+                        JSONArray jsonArray = new JSONArray(ReaderService.resultToString(httpURLConnection.getInputStream()));
+
+                        ArrayList<Product> toAdd = new ArrayList<>();
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jObject = jsonArray.getJSONObject(i);
+                            Product product = new Product(jObject.getString("Name")
+                                    , jObject.getString("ExpiryDate")
+                                    , jObject.getString("Id"));
+                            toAdd.add(product);
+                        }
+                        UserModel.addProducts(toAdd);
+                    }
                 }catch (Exception e){
                     Log.e("information", e.toString());
                 }

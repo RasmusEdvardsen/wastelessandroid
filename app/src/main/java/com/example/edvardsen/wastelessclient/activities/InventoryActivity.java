@@ -23,10 +23,18 @@ public class InventoryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-        UserModel.getInstance();
-        ProductList listAdapter = new
-                ProductList(InventoryActivity.this, UserModel.getProducts());
-        list = findViewById(R.id.inventoryListView);
-        list.setAdapter(listAdapter);
+        RenderView();
     }
+
+    public void RenderView(){
+        UserModel.getInstance();
+        if(UserModel.getProducts().size() > 0){
+            ProductList listAdapter = new
+                    ProductList(InventoryActivity.this, UserModel.getProducts());
+            list = findViewById(R.id.inventoryListView);
+            list.setAdapter(listAdapter);
+        }
+    }
+
+    /*use renderview everytime u go in again*/
 }

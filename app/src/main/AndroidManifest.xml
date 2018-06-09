@@ -38,12 +38,5 @@
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
         android:value="ocr"/>
 
-        <receiver
-            android:name=".services.NotificationPublisher"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.NOTIFY" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>

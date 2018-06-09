@@ -67,12 +67,20 @@ public class UserModel {
         products.add(product);
     }
 
+    public static void addProducts(ArrayList<Product> products){
+        products.addAll(products);
+    }
+
     public static void removeProduct(Product product){
         products.remove(product);
     }
 
     public static ArrayList<Product> getProducts(){
         return products;
+    }
+
+    public static void resetProducts(){
+        products.clear();
     }
 }
 
