@@ -7,13 +7,15 @@ import java.util.Date;
  */
 
 public class AdapterItem {
-    public AdapterItem(String itenName, Date ExpDate, int ID){
-        itemName2=itenName;
-        expDate2= ExpDate;
-        idNum= ID;
-    }
 
     String itemName2;
     Date expDate2;
     int idNum;
+
+    public AdapterItem(String itemName, Date ExpDate, int ID){
+        itemName2=itemName;
+        expDate2= ExpDate;
+        idNum= ID;
+    }
+
 }

@@ -11,26 +11,23 @@ import android.widget.TextView;
 
 import com.example.edvardsen.wastelessclient.R;
 import com.example.edvardsen.wastelessclient.data.FridgeObjects;
+import com.example.edvardsen.wastelessclient.data.Product;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListAdapter extends ArrayAdapter<FridgeObjects> {
     private Context mContext;
-    private List<FridgeObjects> foodList = new ArrayList<>();
+    private ArrayList<Product> products;
 
-    public ListAdapter(@NonNull Context context,  ArrayList<FridgeObjects> food){
-        super(context,0,food);
+    public ListAdapter(@NonNull Context context,  ArrayList<Product> products){
+        super(context,0,products);
         mContext = context;
-        foodList = food;
-
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
         View listItem = convertView;
-
         if(listItem == null){
             listItem = LayoutInflater.from(mContext).inflate(R.layout.single_item,parent,false);
         }
