@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <TableRow>
-        <ImageView
-            android:id="@+id/imgFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/productName"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/productName"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"/>
+    <TextView
+        android:id="@+id/daysLeft"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/inventory_item_days_left"/>
 
-        <TextView
-            android:id="@+id/expirationDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Expiration date : "
-            />
-    </TableRow>
+    <TextView
+        android:id="@+id/expirationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/inventory_item_expiration_date"/>
 </TableLayout>
