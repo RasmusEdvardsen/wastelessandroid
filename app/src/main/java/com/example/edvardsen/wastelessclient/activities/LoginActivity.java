@@ -149,6 +149,14 @@ public class LoginActivity extends Activity {
                                     UserModel.setEmail(emailInput);
                                     UserModel.setPassword(passwordInput);
                                     UserModel.setUserID((Integer.parseInt(object.getString("UserID"))));
+                                    JSONArray jsonArray = object.getJSONArray("ProductsConcrete");
+                                    for(int i = 0; i < jsonArray.length(); i++){
+                                        JSONObject jObject = jsonArray.getJSONObject(i);
+                                        Product product = new Product(jObject.getString("Name")
+                                                , jObject.getString("ExpiryDate")
+                                                , jObject.getString("Id"));
+                                        UserModel.addProduct(product);
+                                    }
                                     HandlerService.makeToast(getBaseContext(), "Success!", Toast.LENGTH_SHORT, 500);
                                     startActivity(new Intent(getBaseContext(), MainActivity.class));
                                 }else{
