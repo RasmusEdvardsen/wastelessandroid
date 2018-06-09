@@ -29,10 +29,10 @@
             android:name=".activities.BarcodeActivity"
             android:label="@string/title_activity_barcode"
         />
-        <activity android:name=".activities.InventoryActivity"></activity>
-        <activity android:name=".activities.OcrActivity"></activity>
-        <activity android:name=".activities.OcrResultActivity"></activity>
-        <activity android:name=".activities.OcrCaptureActivity"></activity>
+        <activity android:name=".activities.InventoryActivity"/>
+        <activity android:name=".activities.OcrActivity"/>
+        <activity android:name=".activities.OcrResultActivity"/>
+        <activity android:name=".activities.OcrCaptureActivity"/>
         <activity android:name=".data.FridgeObjects" />
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -46,5 +46,4 @@
             </intent-filter>
         </receiver>
     </application>
-
 </manifest>
