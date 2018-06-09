@@ -29,25 +29,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AsyncTaskService {
-
-
-
-    public String emailInput;
-    public String passwordInput;
-
-    RelativeLayout relativeLayoutProgressBar;
-    ProgressBar progressBar;
-
-    public AsyncTaskService(String emailInput, String passwordInput){
-        this.emailInput = emailInput;
-        this.passwordInput = passwordInput;
-
-
-    }
-
-
-
-    public void LoginFlow(final Context ctx){
+    public void LoginFlow(final Context ctx, final RelativeLayout relativeLayoutProgressBar, final String emailInput, final String passwordInput){
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -88,11 +70,7 @@ public class AsyncTaskService {
         });
     }
 
-    public void SignUpFlow ( final Context ctx){
-       // final String emailInput = email.getText().toString();
-       // final String passwordInput = password.getText().toString();
-        // String ean = getIntent().getStringExtra("ean");
-        // String FoodTypeName = getIntent().getStringExtra("choice");
+    public void SignUpFlow (final Context ctx, final RelativeLayout relativeLayoutProgressBar, final String emailInput, final String passwordInput){
         final String json = "{\"email\": " + "\"" + emailInput + "\","
                 + "\"password\": " + "\"" + passwordInput + "\"}";
         final String url = Constants.baseURL + Constants.usersPath;
@@ -123,6 +101,14 @@ public class AsyncTaskService {
                             UserModel.setEmail(emailInput);
                             UserModel.setPassword(passwordInput);
                             UserModel.setUserID((Integer.parseInt(object.getString("UserID"))));
+                            JSONArray jsonArray = object.getJSONArray("ProductsConcrete");
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jObject = jsonArray.getJSONObject(i);
+                                Product product = new Product(jObject.getString("Name")
+                                        , jObject.getString("ExpiryDate")
+                                        , jObject.getString("Id"));
+                                UserModel.addProduct(product);
+                            }
                             HandlerService.makeToast(ctx, "Success!", Toast.LENGTH_SHORT, 500);
                             ctx.startActivity(new Intent(ctx, MainActivity.class));
                         }else{
@@ -140,12 +126,7 @@ public class AsyncTaskService {
         });
     }
 
-    public void GetFridgeObjects(final Context ctx){
-
-        //  String newString;
-        // String ean = getIntent().getStringExtra("ean");
-        // String FoodTypeName = getIntent().getStringExtra("choice");
-
+    public void GetFridgeObjects(final Context ctx, final String emailInput, final String passwordInput){
         final String url = Constants.baseURL + Constants.productsPath;
         final String json = "{\"UserID\": " + "\"" + String.valueOf(UserModel.getUserID()) + "\","
              + "}";
@@ -172,8 +153,6 @@ public class AsyncTaskService {
             }
         });
     }
-
-
 }
 
 

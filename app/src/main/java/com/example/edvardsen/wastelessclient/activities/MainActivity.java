@@ -17,9 +17,7 @@ import com.example.edvardsen.wastelessclient.R;
 public class MainActivity extends Activity {
 
     private Button scanBtn;
-    private Button ocrBtn;
     private Button inventoryBtn;
-    private Button pocrBtn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

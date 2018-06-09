@@ -23,6 +23,4 @@
     <string name="ocr_error">"Error reading text: %1$s"</string>
     <string name="mainMenu">Welcome to wasteless - Here, you can scan products, and we will notify
         you when it is about to expire. You can also see all your products in your inventory, when you have scanned them.</string>
-    <string name="title">Expiration</string>
-    <string name="content">Expiration</string>
 </resources>
