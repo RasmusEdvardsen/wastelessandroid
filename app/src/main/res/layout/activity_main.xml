@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context="com.example.edvardsen.wastelessclient.activities.MainActivity">
+    tools:context="com.example.edvardsen.wastelessclient.save.example.edvardsen.wastelessclient.activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

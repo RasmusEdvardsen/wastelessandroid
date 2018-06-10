@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.edvardsen.wastelessclient">
+    package="save.the.environment.wastelessclient">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -17,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
        >
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name="save.the.environment.wastelessclient.activities.MainActivity" />
+        <activity android:name="save.the.environment.wastelessclient.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,14 +26,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.BarcodeActivity"
+            android:name="save.the.environment.wastelessclient.activities.BarcodeActivity"
             android:label="@string/title_activity_barcode"
         />
-        <activity android:name=".activities.InventoryActivity"/>
-        <activity android:name=".activities.OcrActivity"/>
-        <activity android:name=".activities.OcrResultActivity"/>
-        <activity android:name=".activities.OcrCaptureActivity"/>
-        <activity android:name=".data.FridgeObjects" />
+        <activity android:name="save.the.environment.wastelessclient.activities.InventoryActivity"/>
+        <activity android:name="save.the.environment.wastelessclient.activities.OcrActivity"/>
+        <activity android:name="save.the.environment.wastelessclient.activities.OcrResultActivity"/>
+        <activity android:name="save.the.environment.wastelessclient.activities.OcrCaptureActivity"/>
+        <activity android:name="save.the.environment.wastelessclient.data.FridgeObjects" />
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
         android:value="ocr"/>

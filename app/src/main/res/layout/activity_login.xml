@@ -6,7 +6,7 @@
     android:animateLayoutChanges="true"
     android:id="@+id/activity_login_relativelayout"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.edvardsen.wastelessclient.activities.LoginActivity">
+    tools:context="com.example.edvardsen.wastelessclient.save.example.edvardsen.wastelessclient.activities.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
