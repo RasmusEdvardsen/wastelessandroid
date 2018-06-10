@@ -39,6 +39,7 @@ public class InventoryActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("information", "onresume");
         RenderView();
     }
 }
