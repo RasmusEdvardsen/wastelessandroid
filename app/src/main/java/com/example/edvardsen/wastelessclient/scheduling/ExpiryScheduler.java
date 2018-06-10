@@ -24,5 +24,6 @@ public class ExpiryScheduler {
                 asyncTaskService.GetProductsAndRender();
             }
         }, 1, 10, TimeUnit.SECONDS);
+        Log.i("information", "test");
     }
 }
