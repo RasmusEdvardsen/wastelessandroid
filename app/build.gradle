@@ -34,4 +34,5 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.0.3@aar'
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.google.android.gms:play-services-vision:12.0.1'
+    implementation 'joda-time:joda-time:2.9.4'
 }

@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         Button scanBtn = findViewById(R.id.scanBtn);
         Button inventoryBtn = findViewById(R.id.inventoryBtn);
 
-        ExpiryScheduler.ScheduleExpiryChecker(getBaseContext());
+        ExpiryScheduler.scheduleExpiryChecker(getBaseContext());
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -67,8 +67,8 @@ public class UserModel {
         products.add(product);
     }
 
-    public static void addProducts(ArrayList<Product> products){
-        products.addAll(products);
+    public static void addProducts(ArrayList<Product> toAdd){
+        products.addAll(toAdd);
     }
 
     public static void removeProduct(Product product){

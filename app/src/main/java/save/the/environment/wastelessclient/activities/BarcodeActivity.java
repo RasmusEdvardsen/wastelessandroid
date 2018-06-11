@@ -161,7 +161,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
                         });
                     }
                 }catch (Exception e){
-                    Log.e("information", e.toString());
                     HandlerService.makeToast(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT, 500);
                 }
             }

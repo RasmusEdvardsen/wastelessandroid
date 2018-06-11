@@ -165,6 +165,7 @@ public class AsyncTaskService {
                                     , jObject.getString("Id"));
                             toAdd.add(product);
                         }
+                        UserModel.resetProducts();
                         UserModel.addProducts(toAdd);
                     }
                 }catch (Exception e){

@@ -32,4 +32,14 @@ public class ProductList extends ArrayAdapter<Product> {
         expirationDate.setText(products.get(position).expirationDate);
         return rowView;
     }
+
+    @Override
+    public int getCount() {
+        return this.products.size();
+    };
+
+    @Override
+    public Product getItem(final int position) {
+        return this.products.get(position);
+    }
 }
