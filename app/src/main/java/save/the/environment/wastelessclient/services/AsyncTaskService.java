@@ -114,7 +114,7 @@ public class AsyncTaskService {
         });
     }
 
-    public void GetProducts(){
+    public void GetProductsAndRender(){
         UserModel.getInstance();
         AsyncTask.execute(new Runnable() {
             @Override
@@ -142,7 +142,7 @@ public class AsyncTaskService {
         });
     }
 
-    public void GetProductsAndRender(){
+    public void GetProducts(){
         UserModel.getInstance();
         AsyncTask.execute(new Runnable() {
             @Override

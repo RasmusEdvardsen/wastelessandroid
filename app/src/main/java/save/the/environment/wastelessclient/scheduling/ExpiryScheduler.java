@@ -20,8 +20,13 @@ public class ExpiryScheduler {
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
+                //Reloads UserModel products
                 AsyncTaskService asyncTaskService = new AsyncTaskService();
-                asyncTaskService.GetProductsAndRender();
+                asyncTaskService.GetProducts();
+
+                //TODO: Check for products expiring < 1 day
+
+                //TODO: If check above is true, notify
             }
         }, 1, 10, TimeUnit.SECONDS);
     }

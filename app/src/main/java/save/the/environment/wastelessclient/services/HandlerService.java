@@ -15,7 +15,6 @@ import save.the.environment.wastelessclient.activities.OcrResultActivity;
  * Created by Epico-u-01 on 4/7/2018.
  */
 
-//TODO: MAKE POST AND POSTDELAYED HANDLERS THAT TAKE A SERVICE.SOMEMETHODTODO ( = SOME NUMBER), THEN GO THROUGH SWITCH CASE AND FIND METHOD TO CALL.
 public class HandlerService {
     public static void setVisibility(final View view, final Integer visibility){
         new Handler(Looper.getMainLooper()).post(new Runnable() {
