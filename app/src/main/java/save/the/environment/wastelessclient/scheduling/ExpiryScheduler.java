@@ -1,7 +1,9 @@
 package save.the.environment.wastelessclient.scheduling;
 
+import android.content.Context;
 import android.util.Log;
 
+import save.the.environment.wastelessclient.notifications.ExpiryNotifier;
 import save.the.environment.wastelessclient.services.AsyncTaskService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ExpiryScheduler {
     //TODO: THIS CAN BE DONE BETTER
-    public static void ScheduleExpiryChecker(){
+    public static void ScheduleExpiryChecker(final Context ctx){
         ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor();
 
@@ -25,8 +27,10 @@ public class ExpiryScheduler {
                 asyncTaskService.GetProducts();
 
                 //TODO: Check for products expiring < 1 day
+                
 
                 //TODO: If check above is true, notify
+                ExpiryNotifier.createAndNotify(ctx);
             }
         }, 1, 10, TimeUnit.SECONDS);
     }

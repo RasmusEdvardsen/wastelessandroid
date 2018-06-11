@@ -15,22 +15,24 @@ public class InventoryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(save.the.environment.wastelessclient.R.layout.activity_inventory);
-        RenderView();
+        RenderView(false);
     }
 
-    public void RenderView(){
+    public void RenderView(boolean isChanged){
         UserModel.getInstance();
         if(UserModel.getProducts().size() > 0){
             ProductList listAdapter = new
                     ProductList(InventoryActivity.this, UserModel.getProducts());
             list = findViewById(save.the.environment.wastelessclient.R.id.inventoryListView);
             list.setAdapter(listAdapter);
+            //TODO: TRY THIS
+            if (isChanged) listAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        RenderView();
+        RenderView(true);
     }
 }
