@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 
 import save.the.environment.wastelessclient.R;
+import save.the.environment.wastelessclient.notifications.ExpiryNotifier;
 import save.the.environment.wastelessclient.scheduling.ExpiryScheduler;
 
 public class MainActivity extends Activity {
@@ -33,30 +34,8 @@ public class MainActivity extends Activity {
 
 
 
-        
 
-        if (Build.VERSION.SDK_INT < 26) {
-            return;
-        }
-        NotificationManager notificationManager =
-                (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationChannel channel = new NotificationChannel("default",
-                "Channel name",
-                NotificationManager.IMPORTANCE_DEFAULT);
-        channel.setDescription("Channel description");
-        notificationManager.createNotificationChannel(channel);
-
-        Notification notification = new NotificationCompat.Builder(getBaseContext(), "default")
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("qwr")
-                .setContentText("qwewqr")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .build();
-        notificationManager.notify(0, notification);
-
-
-
-        //Notify();
+        ExpiryNotifier.createAndNotify(getBaseContext());
 
 
 
@@ -81,7 +60,7 @@ public class MainActivity extends Activity {
 
 
 
-    @TargetApi(26)
+    /*@TargetApi(26)
     public void Notify(){
         Intent intent = new Intent(this, InventoryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -138,5 +117,29 @@ public class MainActivity extends Activity {
         mNotificationManager.notify(0, notification);
 
 
-    }
+    }*/
+
+    /*Intent intent = new Intent(this, InventoryActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        if (Build.VERSION.SDK_INT < 26) {
+            return;
+        }
+        NotificationManager notificationManager =
+                (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel("default",
+                "Channel name",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("Channel description");
+        notificationManager.createNotificationChannel(channel);
+
+        Notification notification = new NotificationCompat.Builder(getBaseContext(), "default")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("qwr")
+                .setContentText("qwewqr")
+                .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build();
+        notificationManager.notify(0, notification);*/
 }
