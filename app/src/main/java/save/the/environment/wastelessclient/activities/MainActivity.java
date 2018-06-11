@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,7 +30,37 @@ public class MainActivity extends Activity {
         Button scanBtn = findViewById(R.id.scanBtn);
         Button inventoryBtn = findViewById(R.id.inventoryBtn);
 
-        Notify();
+
+
+
+        
+
+        if (Build.VERSION.SDK_INT < 26) {
+            return;
+        }
+        NotificationManager notificationManager =
+                (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel("default",
+                "Channel name",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("Channel description");
+        notificationManager.createNotificationChannel(channel);
+
+        Notification notification = new NotificationCompat.Builder(getBaseContext(), "default")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("qwr")
+                .setContentText("qwewqr")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build();
+        notificationManager.notify(0, notification);
+
+
+
+        //Notify();
+
+
+
+
 
         ExpiryScheduler.ScheduleExpiryChecker();
 
@@ -50,6 +83,10 @@ public class MainActivity extends Activity {
 
     @TargetApi(26)
     public void Notify(){
+        Intent intent = new Intent(this, InventoryActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         // The id of the channel.
@@ -90,9 +127,10 @@ public class MainActivity extends Activity {
 
         // Create a notification and set the notification channel.
         Notification notification = new Notification.Builder(MainActivity.this)
-                .setContentTitle("New Message")
-                .setContentText("You've received new messages.")
+                .setContentTitle("Wasteless")
+                .setContentText("One or more of your products are about to expire!")
                 .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentIntent(pendingIntent)
                 .setChannelId(CHANNEL_ID)
                 .build();
 
