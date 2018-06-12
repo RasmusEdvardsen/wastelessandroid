@@ -36,7 +36,7 @@ public class ProductList extends ArrayAdapter<Product> {
     @Override
     public int getCount() {
         return this.products.size();
-    };
+    }
 
     @Override
     public Product getItem(final int position) {
