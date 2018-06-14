@@ -13,6 +13,9 @@ import save.the.environment.wastelessclient.data.Product;
 import save.the.environment.wastelessclient.data.UserModel;
 import save.the.environment.wastelessclient.miscellaneous.Constants;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,6 +28,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import save.the.environment.wastelessclient.notifications.ExpiryNotifier;
 
 public class AsyncTaskService {
     public void LoginFlow(final Context ctx, final RelativeLayout relativeLayoutProgressBar, final String emailInput, final String passwordInput){
@@ -114,7 +118,7 @@ public class AsyncTaskService {
         });
     }
 
-    public void GetProductsAndRender(){
+    public void getProductsAndHandleExpiration(final Context ctx){
         UserModel.getInstance();
         AsyncTask.execute(new Runnable() {
             @Override
@@ -135,6 +139,27 @@ public class AsyncTaskService {
                                     , jObject.getString("Id"));
                             UserModel.addProduct(product);
                         }
+
+
+
+                        //TODO: The rest of this code might not wait for the async to finish
+                        //TODO: Check for products expiring < 1 day
+                        boolean expiring = false;
+                        boolean isExpired = false;
+                        UserModel.getInstance();
+                        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+                        for (Product product : UserModel.getProducts()){
+                            if(product.expirationDate.equals("null")) continue;
+                            if(product.expirationDate.contains("T")){
+                                String formattedDate = product.expirationDate.replace("T", " ");
+                                DateTime expDate = formatter.parseDateTime(formattedDate);
+                                DateTime nowDate = new DateTime();
+                                long diff = expDate.getMillis() - nowDate.getMillis();
+                                if(diff < 0) isExpired = true;
+                                if(diff < 86400000 * 2) expiring = true;
+                            }
+                        }
+                        if(expiring) ExpiryNotifier.createAndNotify(ctx);
                     }
                 }catch (Exception e){
                 }

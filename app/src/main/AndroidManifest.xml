@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -17,8 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
        >
-        <activity android:name="save.the.environment.wastelessclient.activities.MainActivity" />
-        <activity android:name="save.the.environment.wastelessclient.activities.LoginActivity">
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,14 +25,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="save.the.environment.wastelessclient.activities.BarcodeActivity"
+            android:name=".activities.BarcodeActivity"
             android:label="@string/title_activity_barcode"
         />
-        <activity android:name="save.the.environment.wastelessclient.activities.InventoryActivity"/>
-        <activity android:name="save.the.environment.wastelessclient.activities.OcrActivity"/>
-        <activity android:name="save.the.environment.wastelessclient.activities.OcrResultActivity"/>
-        <activity android:name="save.the.environment.wastelessclient.activities.OcrCaptureActivity"/>
-        <activity android:name="save.the.environment.wastelessclient.data.FridgeObjects" />
+        <activity android:name=".activities.InventoryActivity"/>
+        <activity android:name=".activities.OcrActivity"/>
+        <activity android:name=".activities.OcrResultActivity"/>
+        <activity android:name=".activities.OcrCaptureActivity"/>
+        <activity android:name=".data.FridgeObjects" />
+
+        <service android:name=".services.ScheduledJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
         android:value="ocr"/>
