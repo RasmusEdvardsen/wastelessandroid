@@ -72,6 +72,6 @@
         android:layout_alignStart="@+id/text_value"
         android:background="@drawable/buttonstyledark"
         android:text="@string/date_picker_button"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"/>
 
 </RelativeLayout>

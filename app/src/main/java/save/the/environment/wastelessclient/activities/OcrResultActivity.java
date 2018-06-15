@@ -5,15 +5,23 @@ import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
+import save.the.environment.wastelessclient.R;
 import save.the.environment.wastelessclient.data.DateRecog;
 import save.the.environment.wastelessclient.data.FridgeObjects;
 import com.google.android.gms.common.api.CommonStatusCodes;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class OcrResultActivity extends Activity implements View.OnClickListener {
@@ -25,6 +33,9 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
     private TextView textValue;
     DateRecog dateRecog = new DateRecog();
     private static final int RC_OCR_CAPTURE = 9003;
+    DatePicker datePicker;
+    Button setDate;
+    Calendar c = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,33 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
         useFlash = findViewById(save.the.environment.wastelessclient.R.id.use_flash);
 
         findViewById(save.the.environment.wastelessclient.R.id.read_text).setOnClickListener(this);
+
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        setDate = findViewById(R.id.datePickerButton);
+        datePicker = findViewById(R.id.datePicker);
+        datePicker.updateDate(year, month, day);
+
+        setDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String datePickerDate = datePicker.getYear() + "-"+ + datePicker.getMonth() + "-" + datePicker.getDayOfMonth();
+                Log.i("information", "datepickerdate" + datePickerDate);
+                DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+                try {
+                    Bundle extras = getIntent().getExtras();
+                    String barcode = extras.getString("ean");
+                    String FoodTypeName = getIntent().getStringExtra("choice");
+                    DateTime expDate = formatter.parseDateTime(datePickerDate);
+                    Date dateToDB = expDate.toDate();
+                    new FridgeObjects(FoodTypeName,dateToDB,barcode).SendFridgeToDb(getBaseContext());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

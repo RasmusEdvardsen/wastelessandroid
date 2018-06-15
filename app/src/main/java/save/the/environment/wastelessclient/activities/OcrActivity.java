@@ -10,17 +10,29 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import save.the.environment.wastelessclient.R;
 import save.the.environment.wastelessclient.data.DateRecog;
+import save.the.environment.wastelessclient.data.FridgeObjects;
+
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import static android.Manifest.permission.CAMERA;
@@ -29,13 +41,14 @@ import static android.Manifest.permission.CAMERA;
 
 public class OcrActivity extends Activity {
 
-   SurfaceView cameraView;
-   TextView textView;
-   CameraSource cameraSource;
-   final int RequestCameraPermissionID = 1001;
+    SurfaceView cameraView;
+    TextView textView;
+    CameraSource cameraSource;
+    final int RequestCameraPermissionID = 1001;
     DateRecog dateRecog = new DateRecog();
-   Date OCResult;
-   String[] Parseresults;
+    Date OCResult;
+    String[] Parseresults;
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -67,9 +80,9 @@ public class OcrActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(save.the.environment.wastelessclient.R.layout.activity_ocr);
+        Log.i("information", "test");
 
-       // cameraView = (SurfaceView) findViewById(R.id.surfaceView);
-      //  textView = (TextView) findViewById(R.id.textView);
+
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
 
@@ -162,6 +175,8 @@ public class OcrActivity extends Activity {
                 }
             });
         }
+
+
 
     }
 }
