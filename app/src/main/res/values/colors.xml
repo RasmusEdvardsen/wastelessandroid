@@ -6,6 +6,7 @@
     <color name="colorPink">#FE104D</color>
     <color name="colorPrimaryDarkTransparent">#F223283A</color>
     <color name="colorPrimaryLight">#4023283A</color>
+    <color name="colorPrimaryLightLight">#a0a9de</color>
 </resources>
 
 <!--
