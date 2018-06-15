@@ -56,7 +56,7 @@ public class HandlerService {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(ctx, OcrResultActivity.class);
-                        intent.putExtra("choise", scanResults[0]);
+                        intent.putExtra("choice", scanResults[0]);
                         intent.putExtra("ean", barcode);
                         ctx.startActivity(intent);
                     }

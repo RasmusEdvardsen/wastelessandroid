@@ -173,36 +173,4 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         AlertDialog alert1 = builder.create();
         alert1.show();
     }
-
-    public void secondDialog(final Result result){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final String barcode = result.getText();
-        builder.setTitle("Choose an option");
-
-        builder.setPositiveButton("Scan", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                scanResults[0] = parseResults[0];
-                scanResults[1] = parseResults[1];
-                scanResults[2] = parseResults[2];
-                scannerView.stopCameraPreview();
-                startActivity(new Intent(getBaseContext(), OcrResultActivity.class));
-                //scannerView.resumeCameraPreview(BarcodeActivity.this);
-            }
-        });
-
-        builder.setPositiveButton("Scan More", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                scanResults[0] = parseResults[0];
-                scanResults[1] = parseResults[1];
-                scanResults[2] = parseResults[2];
-                scannerView.resumeCameraPreview(BarcodeActivity.this);
-            }
-        });
-        builder.setMessage(result.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
-    }
 }

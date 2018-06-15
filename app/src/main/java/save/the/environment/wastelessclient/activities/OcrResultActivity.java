@@ -65,8 +65,7 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
                 Log.i("information", "datepickerdate" + datePickerDate);
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
                 try {
-                    Bundle extras = getIntent().getExtras();
-                    String barcode = extras.getString("ean");
+                    String barcode = getIntent().getStringExtra("ean");
                     String FoodTypeName = getIntent().getStringExtra("choice");
                     DateTime expDate = formatter.parseDateTime(datePickerDate);
                     Date dateToDB = expDate.toDate();

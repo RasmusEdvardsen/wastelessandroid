@@ -41,7 +41,7 @@ public class FridgeObjects extends Activity {
         final String json = "{\"UserID\": " + "\"" + String.valueOf(UserModel.getUserID()) + "\","
                 + "\"EAN\": " + "\"" + ean + "\","
                 + "\"FoodTypeName\": " + "\"" + name + "\","
-                + "\"ExpirationDate\": " + "\"" + DateFormat.format("yyyy-MM-dd", expDate) + "\"," + "}";
+                + "\"ExpirationDate\": " + "\"" + DateFormat.format("yyyy-MM-dd", expDate) + "\"" + "}";
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
