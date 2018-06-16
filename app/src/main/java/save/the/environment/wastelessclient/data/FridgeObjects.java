@@ -2,6 +2,7 @@ package save.the.environment.wastelessclient.data;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import save.the.environment.wastelessclient.activities.BarcodeActivity;
+import save.the.environment.wastelessclient.activities.InventoryActivity;
 import save.the.environment.wastelessclient.miscellaneous.Constants;
 import save.the.environment.wastelessclient.services.HandlerService;
 

@@ -32,7 +32,6 @@
         />
         <activity android:name=".activities.InventoryActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.OcrActivity"/>
         <activity android:name=".activities.OcrResultActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.OcrCaptureActivity"
