@@ -5,15 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import save.the.environment.wastelessclient.activities.OcrResultActivity;
-
-/**
- * Created by Epico-u-01 on 4/7/2018.
- */
 
 public class HandlerService {
     public static void setVisibility(final View view, final Integer visibility){
@@ -43,12 +41,22 @@ public class HandlerService {
                 });
 
                 final EditText input = new EditText(ctx);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setHint("Manual name input here");
+                input.setLayoutParams(lp);
+                builder.setView(input);
 
-                builder.setNeutralButton("Manually Enter Name ", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton("Manually Entered Name", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         input.setText(input.getText());
-                        //secondDialog(result);
+                        Intent intent = new Intent(ctx, OcrResultActivity.class);
+                        intent.putExtra("choice",input.getText().toString());
+                        intent.putExtra("ean", barcode);
+                        Log.i("information", input.getText().toString());
+                        ctx.startActivity(intent);
                     }
                 });
 

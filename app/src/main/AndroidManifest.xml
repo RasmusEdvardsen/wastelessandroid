@@ -16,23 +16,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
        >
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.BarcodeActivity"
             android:label="@string/title_activity_barcode"
+            android:screenOrientation="portrait"
         />
-        <activity android:name=".activities.InventoryActivity"/>
+        <activity android:name=".activities.InventoryActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.OcrActivity"/>
-        <activity android:name=".activities.OcrResultActivity"/>
-        <activity android:name=".activities.OcrCaptureActivity"/>
-        <activity android:name=".data.FridgeObjects" />
+        <activity android:name=".activities.OcrResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.OcrCaptureActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".data.FridgeObjects"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".services.ScheduledJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />

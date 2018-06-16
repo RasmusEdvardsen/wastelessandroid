@@ -50,6 +50,12 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+        super.onBackPressed();
+    }
+
     private void requestPermission() {
         ActivityCompat.requestPermissions( this, new String[]{CAMERA}, REQUEST_CAMERA);
     }

@@ -25,7 +25,6 @@ public class MainActivity extends Activity {
         Button scanBtn = findViewById(R.id.scanBtn);
         Button inventoryBtn = findViewById(R.id.inventoryBtn);
 
-        //ExpiryScheduler.scheduleExpiryChecker(getBaseContext());
 
 
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
@@ -36,6 +35,7 @@ public class MainActivity extends Activity {
                 .setPeriodic(1000 * 60 * 60 * 8);
         if((jobScheduler != null ? jobScheduler.schedule(builder.build()) : 0) == JobScheduler.RESULT_FAILURE)
             Log.i("information", "jobscheduling failed");
+
 
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
@@ -51,9 +51,4 @@ public class MainActivity extends Activity {
             }
         });
     }
-
-
-
-
-
 }
