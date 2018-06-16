@@ -7,9 +7,7 @@ import android.util.Log;
 public class ScheduledJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.i("information", "" + params.getJobId());
         //Reverting back to using handler might be necessary.
-        Log.i("information", "onstartjob called");
         AsyncTaskService asyncTaskService = new AsyncTaskService();
         asyncTaskService.getProductsAndHandleExpiration(getBaseContext());
         return false;

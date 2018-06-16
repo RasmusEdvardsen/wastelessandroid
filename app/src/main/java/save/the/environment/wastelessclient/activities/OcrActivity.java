@@ -80,7 +80,6 @@ public class OcrActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(save.the.environment.wastelessclient.R.layout.activity_ocr);
-        Log.i("information", "test");
 
 
 
@@ -151,12 +150,10 @@ public class OcrActivity extends Activity {
                                        String test = dateRecog.determineDateFormat(item.getValue());
                                        SimpleDateFormat formatter = new SimpleDateFormat(test);
                                        Date date = formatter.parse(item.getValue());
-                                       Log.i("information:",item.getValue() + " testing " +date.toString());
                                        //String test = dateRecog.determineDateFormat(item.getValue());
                                        if(false){
 
                                           // Date returnExpDate = dateRecog.getDate(item.getValue(),test);
-                                          // Log.i("information:",returnExpDate.toString());
                                            Toast.makeText(getApplicationContext(), "Date found!", Toast.LENGTH_LONG).show();
                                            Thread.currentThread().interrupt();
                                        }

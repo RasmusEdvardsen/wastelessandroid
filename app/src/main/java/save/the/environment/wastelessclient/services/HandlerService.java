@@ -55,7 +55,6 @@ public class HandlerService {
                         Intent intent = new Intent(ctx, OcrResultActivity.class);
                         intent.putExtra("choice",input.getText().toString());
                         intent.putExtra("ean", barcode);
-                        Log.i("information", input.getText().toString());
                         ctx.startActivity(intent);
                     }
                 });

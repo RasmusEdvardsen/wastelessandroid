@@ -62,7 +62,6 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
             @Override
             public void onClick(View view) {
                 String datePickerDate = datePicker.getYear() + "-"+ + datePicker.getMonth() + "-" + datePicker.getDayOfMonth();
-                Log.i("information", "datepickerdate" + datePickerDate);
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
                 try {
                     String barcode = getIntent().getStringExtra("ean");

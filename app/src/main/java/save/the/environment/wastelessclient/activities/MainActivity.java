@@ -34,7 +34,6 @@ public class MainActivity extends Activity {
                         ScheduledJobService.class.getName()))
                 .setPeriodic(1000 * 60 * 60 * 8);
         if((jobScheduler != null ? jobScheduler.schedule(builder.build()) : 0) == JobScheduler.RESULT_FAILURE)
-            Log.i("information", "jobscheduling failed");
 
 
 
