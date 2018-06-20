@@ -153,7 +153,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
 
                         String[] words = wordOccurrences.split(", ");
 
-                        Log.i("information", wordOccurrences);
 
                         for(int i = 0; i < words.length; i++){
                             scanResults[i]=words[i];

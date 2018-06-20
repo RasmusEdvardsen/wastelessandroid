@@ -5,21 +5,30 @@
     <TextView
         android:id="@+id/productName"
         android:layout_margin="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
 
-    <!--<TextView
-        android:id="@+id/daysLeft"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/inventory_item_days_left"/>-->
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/expirationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/inventory_item_expiration_date"
+            android:layout_weight="0.8"/>
+        <ImageView
+            android:id="@+id/deleteProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="0.2"
+            android:src="@drawable/baseline_clear_black_18dp"
+            android:onClick="deleteProduct"/>
 
-    <TextView
-        android:id="@+id/expirationDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/inventory_item_expiration_date"/>
+    </LinearLayout>
 </TableLayout>
