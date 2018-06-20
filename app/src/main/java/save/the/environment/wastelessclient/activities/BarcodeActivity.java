@@ -19,9 +19,9 @@ import save.the.environment.wastelessclient.miscellaneous.Constants;
 import save.the.environment.wastelessclient.services.HandlerService;
 import save.the.environment.wastelessclient.services.ReaderService;
 import com.google.zxing.Result;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
@@ -30,7 +30,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-    final String[] scanResults = new String[3];
+    final String[] scanResults = new String[50];
     final  String[] barcodeResults = new String[1];
     public String[] parseResults = new String[10];
 
@@ -138,25 +138,26 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
             public void run() {
                 try{
                     // Create URL
-                    URL loginURL = new URL(Constants.baseURL + Constants.scrapePath + "/" + barcode);
+                    URL loginURL = new URL(Constants.baseURL + Constants.scrapePath + "/" + String.valueOf(1974017257539L)); /**/
 
                     // Create connection
                     HttpURLConnection httpURLConnection = (HttpURLConnection) loginURL.openConnection();
 
                     if(httpURLConnection.getResponseCode() == 200){
-
                         String wordOccurrences = ReaderService.resultToString(httpURLConnection.getInputStream());
-                        if(wordOccurrences.startsWith("\"")){
+
+                        if(wordOccurrences.startsWith("\""))
                             wordOccurrences = wordOccurrences.substring(1, wordOccurrences.length());
-                        }
-                        if(wordOccurrences.endsWith("\"")){
+                        if(wordOccurrences.endsWith("\""))
                             wordOccurrences = wordOccurrences.substring(0, wordOccurrences.length()-1);
-                        }
+
                         String[] words = wordOccurrences.split(", ");
 
-                        scanResults[0]=words[0];
-                        scanResults[1]=words[1];
-                        scanResults[2]=words[2];
+                        Log.i("information", wordOccurrences);
+
+                        for(int i = 0; i < words.length; i++){
+                            scanResults[i]=words[i];
+                        }
                         barcodeResults[0]=barcode;
 
                         new Handler(Looper.getMainLooper()).post(new Runnable() {

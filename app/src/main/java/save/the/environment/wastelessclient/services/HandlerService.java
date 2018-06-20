@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import save.the.environment.wastelessclient.activities.OcrResultActivity;
 
 public class HandlerService {
@@ -29,16 +32,39 @@ public class HandlerService {
             public void run() {
 
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                builder.setItems(scanResults, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(ctx, OcrResultActivity.class);
-                        intent.putExtra("choice", scanResults[i]);
-                        intent.putExtra("ean", barcode);
-                        ctx.startActivity(intent);
 
+                if (scanResults != null && scanResults.length > 0){
+                    final ArrayList<String> tmp = new ArrayList<>();
+                    for (int i = 0; i < scanResults.length; i++){
+                        if(i == 3) break;
+                        if(scanResults[i] != null){
+                            if(!scanResults[i].isEmpty()){
+                                tmp.add(scanResults[i]);
+                            }
+                        }
                     }
-                });
+
+                    if(tmp.size() > 0){
+                        builder.setItems(tmp.toArray(new String[tmp.size()]), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(ctx, OcrResultActivity.class);
+                                intent.putExtra("choice", tmp.get(i));
+                                intent.putExtra("ean", barcode);
+                                ctx.startActivity(intent);
+                            }
+                        });
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(ctx, OcrResultActivity.class);
+                                intent.putExtra("choice", scanResults[0]);
+                                intent.putExtra("ean", barcode);
+                                ctx.startActivity(intent);
+                            }
+                        });
+                    }
+                }
 
                 final EditText input = new EditText(ctx);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -54,16 +80,6 @@ public class HandlerService {
                         input.setText(input.getText());
                         Intent intent = new Intent(ctx, OcrResultActivity.class);
                         intent.putExtra("choice",input.getText().toString());
-                        intent.putExtra("ean", barcode);
-                        ctx.startActivity(intent);
-                    }
-                });
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(ctx, OcrResultActivity.class);
-                        intent.putExtra("choice", scanResults[0]);
                         intent.putExtra("ean", barcode);
                         ctx.startActivity(intent);
                     }
