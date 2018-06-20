@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import save.the.environment.wastelessclient.activities.InventoryActivity;
 import save.the.environment.wastelessclient.activities.MainActivity;
 import save.the.environment.wastelessclient.data.Product;
 import save.the.environment.wastelessclient.data.UserModel;
@@ -28,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import save.the.environment.wastelessclient.miscellaneous.ProductList;
 import save.the.environment.wastelessclient.notifications.ExpiryNotifier;
 
 public class AsyncTaskService {
@@ -132,6 +134,7 @@ public class AsyncTaskService {
 
                     if(httpURLConnection.getResponseCode() == 200){
                         JSONArray jsonArray = new JSONArray(ReaderService.resultToString(httpURLConnection.getInputStream()));
+                        UserModel.resetProducts();
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject jObject = jsonArray.getJSONObject(i);
                             Product product = new Product(jObject.getString("Name")
@@ -139,9 +142,6 @@ public class AsyncTaskService {
                                     , jObject.getString("Id"));
                             UserModel.addProduct(product);
                         }
-
-
-
                         //TODO: The rest of this code might not wait for the async to finish
                         //TODO: Check for products expiring < 1 day
                         boolean expiring = false;
@@ -160,38 +160,6 @@ public class AsyncTaskService {
                             }
                         }
                         if(expiring) ExpiryNotifier.createAndNotify(ctx);
-                    }
-                }catch (Exception e){
-                }
-            }
-        });
-    }
-
-    public void GetProducts(){
-        UserModel.getInstance();
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    // Create URL
-                    URL loginURL = new URL(Constants.baseURL + Constants.productsPath + "?userID=" + UserModel.getUserID() + "&format=concrete");
-
-                    // Create connection
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) loginURL.openConnection();
-
-                    if(httpURLConnection.getResponseCode() == 200){
-                        JSONArray jsonArray = new JSONArray(ReaderService.resultToString(httpURLConnection.getInputStream()));
-
-                        ArrayList<Product> toAdd = new ArrayList<>();
-                        for(int i = 0; i < jsonArray.length(); i++){
-                            JSONObject jObject = jsonArray.getJSONObject(i);
-                            Product product = new Product(jObject.getString("Name")
-                                    , jObject.getString("ExpiryDate")
-                                    , jObject.getString("Id"));
-                            toAdd.add(product);
-                        }
-                        UserModel.resetProducts();
-                        UserModel.addProducts(toAdd);
                     }
                 }catch (Exception e){
                 }
