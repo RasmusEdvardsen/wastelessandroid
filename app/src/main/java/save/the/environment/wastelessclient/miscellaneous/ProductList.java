@@ -1,6 +1,7 @@
 package save.the.environment.wastelessclient.miscellaneous;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-
+import save.the.environment.wastelessclient.R;
 import save.the.environment.wastelessclient.data.Product;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductList extends ArrayAdapter<Product> {
     private final Activity context;
@@ -29,7 +32,14 @@ public class ProductList extends ArrayAdapter<Product> {
         TextView productName = rowView.findViewById(save.the.environment.wastelessclient.R.id.productName);
         TextView expirationDate = rowView.findViewById(save.the.environment.wastelessclient.R.id.expirationDate);
         productName.setText(products.get(position).name);
-        expirationDate.setText(products.get(position).expirationDate);
+
+        String formatted = products.get(position).expirationDate;
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            formatted = sdf.format(sdf.parse(products.get(position).expirationDate));
+        }catch (Exception e){}
+        expirationDate.setText(String.format("Expires on: %1$s", formatted));
+
         return rowView;
     }
 

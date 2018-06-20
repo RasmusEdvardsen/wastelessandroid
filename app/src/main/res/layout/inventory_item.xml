@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/daysLeft"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/inventory_item_days_left"/>
+        android:text="@string/inventory_item_days_left"/>-->
 
     <TextView
         android:id="@+id/expirationDate"

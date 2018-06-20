@@ -22,6 +22,6 @@
     <string name="mainMenu">Welcome to wasteless - Here, you can scan products, and we will notify
         you when it is about to expire. You can also see all your products in your inventory, when you have scanned them.</string>
     <string name="inventory_item_days_left">Days left: </string>
-    <string name="inventory_item_expiration_date">Expiration date: </string>
+    <string name="inventory_item_expiration_date">Expires on: %1$s</string>
     <string name="date_picker_button">Set date</string>
 </resources>
