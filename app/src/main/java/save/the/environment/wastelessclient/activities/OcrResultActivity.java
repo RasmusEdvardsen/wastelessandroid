@@ -43,7 +43,6 @@ public class OcrResultActivity extends Activity implements View.OnClickListener 
         setContentView(save.the.environment.wastelessclient.R.layout.preocr_menu);
 
         statusMessage = findViewById(save.the.environment.wastelessclient.R.id.status_message);
-        textValue = findViewById(save.the.environment.wastelessclient.R.id.text_value);
 
         autoFocus = findViewById(save.the.environment.wastelessclient.R.id.auto_focus);
         useFlash = findViewById(save.the.environment.wastelessclient.R.id.use_flash);
