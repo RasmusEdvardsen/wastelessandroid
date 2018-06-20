@@ -2,6 +2,7 @@ package save.the.environment.wastelessclient.miscellaneous;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import save.the.environment.wastelessclient.R;
 import save.the.environment.wastelessclient.data.Product;
@@ -41,11 +46,23 @@ public class ProductList extends ArrayAdapter<Product> {
         deleteProduct.setTag(products.get(position).id);
         productName.setText(products.get(position).name);
 
-        String formatted = products.get(position).expirationDate;
-        try{
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            formatted = sdf.format(sdf.parse(products.get(position).expirationDate));
-        }catch (Exception e){}
+        String expdate = products.get(position).expirationDate;
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        if(expdate != null){
+            if(expdate.contains("T"))
+                expdate = expdate.replace("T", " ");
+            DateTime expDate = formatter.parseDateTime(expdate);
+            DateTime nowDate = new DateTime();
+            long diff = expDate.getMillis() - nowDate.getMillis();
+            Log.i("information", diff + "");
+            Log.i("information", String.valueOf(diff < 86400000 * 2));
+            Log.i("information", 86400000 * 2 + "");
+            if(diff < 86400000 * 2 && diff > 0) {
+                productName.setTextColor(context.getResources().getColor(R.color.colorPink));
+                expirationDate.setTextColor(context.getResources().getColor(R.color.colorPink));
+            }
+        }
+        String formatted = formatter.parseLocalDate(expdate).toString("yyyy-MM-dd");
         expirationDate.setText(String.format("Expires on: %1$s", formatted));
 
         return rowView;

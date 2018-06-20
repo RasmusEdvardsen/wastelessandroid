@@ -145,7 +145,6 @@ public class AsyncTaskService {
                         //TODO: The rest of this code might not wait for the async to finish
                         //TODO: Check for products expiring < 1 day
                         boolean expiring = false;
-                        boolean isExpired = false;
                         UserModel.getInstance();
                         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
                         for (Product product : UserModel.getProducts()){
@@ -155,8 +154,7 @@ public class AsyncTaskService {
                                 DateTime expDate = formatter.parseDateTime(formattedDate);
                                 DateTime nowDate = new DateTime();
                                 long diff = expDate.getMillis() - nowDate.getMillis();
-                                if(diff < 0) isExpired = true;
-                                if(diff < 86400000 * 2) expiring = true;
+                                if(diff < 86400000 * 2 && diff > 0) expiring = true;
                             }
                         }
                         if(expiring) ExpiryNotifier.createAndNotify(ctx);
