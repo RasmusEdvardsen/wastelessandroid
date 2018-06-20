@@ -138,7 +138,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
             public void run() {
                 try{
                     // Create URL
-                    URL loginURL = new URL(Constants.baseURL + Constants.scrapePath + "/" + String.valueOf(1974017257539L)); /**/
+                    URL loginURL = new URL(Constants.baseURL + Constants.scrapePath + "/" + barcode);
 
                     // Create connection
                     HttpURLConnection httpURLConnection = (HttpURLConnection) loginURL.openConnection();

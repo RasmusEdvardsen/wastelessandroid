@@ -41,7 +41,7 @@ public class FridgeObjects extends Activity {
     public void SendFridgeToDb(final Context ctx){
         final String url = Constants.baseURL + Constants.productsPath;
         final String json = "{\"UserID\": " + "\"" + String.valueOf(UserModel.getUserID()) + "\","
-                + "\"EAN\": " + "\"" + 1974017257539L + "\","
+                + "\"EAN\": " + "\"" + ean + "\","
                 + "\"FoodTypeName\": " + "\"" + name + "\","
                 + "\"ExpirationDate\": " + "\"" + DateFormat.format("yyyy-MM-dd", expDate) + "\"" + "}";
         AsyncTask.execute(new Runnable() {
