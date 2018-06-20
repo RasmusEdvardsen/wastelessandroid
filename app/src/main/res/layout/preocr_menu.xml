@@ -60,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/text_value"
         android:background="@drawable/buttonstyledark"
         android:text="@string/date_picker_button"
         android:textColor="@android:color/white"/>
