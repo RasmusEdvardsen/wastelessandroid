@@ -154,7 +154,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
                         String[] words = wordOccurrences.split(", ");
 
 
-                        for(int i = 0; i < words.length; i++){
+                        for(int i = 0; i < 3; i++){
                             scanResults[i]=words[i];
                         }
                         barcodeResults[0]=barcode;
@@ -167,6 +167,7 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
                         });
                     }
                 }catch (Exception e){
+                    Log.i("information", e.getMessage());
                     HandlerService.makeToast(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT, 500);
                 }
             }

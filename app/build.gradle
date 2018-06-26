@@ -7,8 +7,8 @@ android {
         applicationId "save.the.environment.wastelessclient"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 801
-        versionName "0.801"
+        versionCode 900
+        versionName "0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
